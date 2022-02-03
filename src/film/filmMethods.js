@@ -11,3 +11,13 @@ exports.addMovie = async (newFilm) => {
         console.log(error)
     }
 }
+
+exports.listMovie = async () => {
+    try {
+        const listResult = await FilmModel.find()
+        console.log(listResult)
+    }
+    catch (error) {
+        console.log(error)
+    }
+}

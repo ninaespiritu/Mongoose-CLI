@@ -14,6 +14,9 @@ const app = async () => {
                 actor: argv.actor,
             })
         }
+        else if (argv.list) {
+            await listMovie()
+        }
         else {
             console.log("Wrong command")
         }
