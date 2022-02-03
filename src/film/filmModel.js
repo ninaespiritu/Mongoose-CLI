@@ -8,6 +8,14 @@ const filmSchema = mongoose.Schema({
     actor: {
         type: String,
         default: "Actor unknown",
+    },
+    genre: {
+        type: String,
+        default: "Genre unknown",
+    },
+    rating: {
+        type: Number,
+        default: "Rating unknown",
     }
 })
 

@@ -42,6 +42,20 @@ exports.updateMovie = async () => {
             )
             console.log(`Movie actor updated: from ${argv.actor} to ${argv.newactor}`)
         }
+        else if (argv.newgenre) {
+            await FilmModel.updateOne(
+                { title: argv.title },
+                { $set: { genre: argv.newgenre } }
+            )
+            console.log(`Movie "${argv.title}" genre updated: ${argv.newgenre}`)
+        }
+        else if (argv.newrating) {
+            await FilmModel.updateOne(
+                { title: argv.title },
+                { $set: { rating: argv.newrating } }
+            )
+            console.log(`Movie "${argv.title}" rating updated: ${argv.newrating}`)
+        }
     }
     catch (error) {
         console.log(error)

@@ -13,6 +13,8 @@ const app = async () => {
             await addMovie({
                 title: argv.title,
                 actor: argv.actor,
+                genre: argv.genre,
+                rating: argv.rating
             })
         }
         // LIST ALL MOVIES 
