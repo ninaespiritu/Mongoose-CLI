@@ -2,7 +2,7 @@ require("./db/connection")
 const mongoose = require("mongoose")
 const yargs = require("yargs")
 const { hideBin } = require("yargs/helpers")
-const { addMovie, listMovie, deleteMovie } = require("./film/filmMethods")
+const { addMovie, listMovie, deleteMovie, updateMovie } = require("./film/filmMethods")
 const argv = yargs(hideBin(process.argv)).argv 
 
 
@@ -19,12 +19,13 @@ const app = async () => {
         else if (argv.list) {
             await listMovie()
         }
+        // UPDATE MOVIE 
+        else if (argv.update) {
+            await updateMovie()
+        }
         // DELETE MOVIE
         else if (argv.delete) {
-            await deleteMovie({
-                title: argv.title,
-                actor: argv.actor,
-            })
+            await deleteMovie()
         }
         else {
             console.log("Wrong command")
