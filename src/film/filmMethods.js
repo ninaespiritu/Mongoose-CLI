@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
-const { argv } = require("yargs")
-const FilmModel = require("./filmModel")
+const mongoose = require("mongoose");
+const { argv } = require("yargs");
+const FilmModel = require("./filmModel");
 
 // ADD MOVIE
 exports.addMovie = async (newFilm) => {
@@ -12,18 +12,44 @@ exports.addMovie = async (newFilm) => {
     catch (error) {
         console.log(error)
     }
-}
+};
 
 // LIST ALL MOVIES
 exports.listMovie = async () => {
     try {
-        const listResult = await FilmModel.find()
-        console.log(listResult)
+        if (argv.title) {
+            const listResult = await FilmModel.find(
+                { title: argv.title }
+            )
+            console.log(listResult)
+        }
+        else if (argv.actor) {
+            const listResult = await FilmModel.find(
+                { actor: argv.actor }
+            )
+            console.log(listResult)
+        }
+        else if (argv.genre) {
+            const listResult = await FilmModel.find(
+                { genre: argv.genre }
+            )
+            console.log(listResult)
+        }
+        else if (argv.rating) {
+            const listResult = await FilmModel.find(
+                { rating: argv.rating }
+            )
+            console.log(listResult)
+        }
+        else {
+            const listResult = await FilmModel.find()
+            console.log(listResult)
+        }
     }
     catch (error) {
         console.log(error)
     }
-}
+};
 
 // UPDATE MOVIE
 exports.updateMovie = async () => {
@@ -60,7 +86,7 @@ exports.updateMovie = async () => {
     catch (error) {
         console.log(error)
     }
-}
+};
 
 // DELETE MOVIE
 exports.deleteMovie = async () => {
@@ -74,4 +100,4 @@ exports.deleteMovie = async () => {
     catch (error) {
         console.log(error)
     }
-}
+};
