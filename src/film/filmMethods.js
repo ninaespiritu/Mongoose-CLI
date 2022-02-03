@@ -21,3 +21,13 @@ exports.listMovie = async () => {
         console.log(error)
     }
 }
+
+exports.deleteMovie = async () => {
+    try {
+        await FilmModel.deleteOne()
+        console.log("Movie deleted") 
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
