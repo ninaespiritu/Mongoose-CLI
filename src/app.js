@@ -18,6 +18,11 @@ const app = async () => {
                 rating: argv.rating,
             })
         }
+        // LIST ONE MOVIE
+        // Syntax    ===>   --listOne --title="<title>" --year=<year>
+        else if (argv.listOne) {
+            await listMovie()
+        }
         // LIST ALL MOVIES 
         // Syntax    ===>   --list
         // Filtered  ===>   --list --filter="<value>"
@@ -38,10 +43,10 @@ const app = async () => {
             await deleteMovie()
         }
         // DELETE ALL MOVIES
-        // Syntax    ===>   --delete_all
-        // Filtered  ===>   --delete_all --filter="<value>"
+        // Syntax    ===>   --deleteAll
+        // Filtered  ===>   --deleteAll --filter="<value>"
         // Filter    ===>   title, year, actor, newgenre, newrating
-        else if (argv.delete_all) {
+        else if (argv.deleteAll) {
             await deleteAll()
         }
         else {

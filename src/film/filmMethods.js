@@ -14,6 +14,19 @@ exports.addMovie = async (newFilm) => {
 };
 
 // LIST ALL MOVIES
+exports.listOne = async () => {
+    try {
+        const listResult = await FilmModel.findOne(
+            { title: argv.title, year: argv.year }
+        )
+        console.log(listResult) 
+    }
+    catch (error) {
+        console.log(error)
+    }
+};
+
+// LIST ALL MOVIES
 exports.listMovie = async () => {
     try {
         if (argv.title) {
