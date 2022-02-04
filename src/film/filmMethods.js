@@ -106,7 +106,18 @@ exports.deleteMovie = async () => {
         await FilmModel.deleteOne(
             { title: argv.title, year: argv.year }
         )
-        console.log(`Movie deleted: "${argv.title}" (${argv.year})`) 
+        console.log(`Movie "${argv.title}" (${argv.year}) deleted`) 
+    }
+    catch (error) {
+        console.log(error)
+    }
+};
+
+// DELETE ALL MOVIES
+exports.deleteAll = async () => {
+    try {
+        await FilmModel.deleteMany()
+        console.log("All movies in database deleted") 
     }
     catch (error) {
         console.log(error)

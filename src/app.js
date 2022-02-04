@@ -2,7 +2,7 @@ require("./db/connection");
 const mongoose = require("mongoose");
 const yargs = require("yargs");
 const { hideBin } = require("yargs/helpers");
-const { addMovie, listMovie, deleteMovie, updateMovie } = require("./film/filmMethods");
+const { addMovie, listMovie, deleteMovie, updateMovie, deleteAll } = require("./film/filmMethods");
 const argv = yargs(hideBin(process.argv)).argv;
 
 
@@ -36,6 +36,11 @@ const app = async () => {
         // Syntax    ===>   --delete --title="<title>" --year=<year>
         else if (argv.delete) {
             await deleteMovie()
+        }
+        // DELETE ALL MOVIES
+        // Syntax    ===>   --delete_all
+        else if (argv.delete_all) {
+            await deleteAll()
         }
         else {
             console.log("Wrong command")
