@@ -113,11 +113,43 @@ exports.deleteMovie = async () => {
     }
 };
 
-// DELETE ALL MOVIES
+// DELETE ALL MOVIES + BY FILTER
 exports.deleteAll = async () => {
     try {
-        await FilmModel.deleteMany()
-        console.log("All movies in database deleted") 
+        if (argv.title) {
+            await FilmModel.deleteMany(
+                { title: argv.title }
+            )
+            console.log(`All movies named "${argv.title}" deleted`)
+        }
+        else if (argv.year) {
+            await FilmModel.deleteMany(
+                { year: argv.year }
+            )
+            console.log(`All ${argv.year} movies deleted`)
+        }
+        else if (argv.actor) {
+            await FilmModel.deleteMany(
+                { actor: argv.actor }
+            )
+            console.log(`All movies starring ${argv.actor} deleted`)
+        }
+        else if (argv.genre) {
+            await FilmModel.deleteMany(
+                { genre: argv.genre }
+            )
+            console.log(`All ${argv.genre} movies deleted`)
+        }
+        else if (argv.rating) {
+            await FilmModel.deleteMany(
+                { rating: argv.rating }
+            )
+            console.log(`All ${argv.rating}-rated movies deleted`)
+        }
+        else {
+            await FilmModel.deleteMany()
+            console.log("All movies in database deleted")
+        }
     }
     catch (error) {
         console.log(error)

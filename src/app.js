@@ -39,6 +39,8 @@ const app = async () => {
         }
         // DELETE ALL MOVIES
         // Syntax    ===>   --delete_all
+        // Filtered  ===>   --delete_all --filter="<value>"
+        // Filter    ===>   title, year, actor, newgenre, newrating
         else if (argv.delete_all) {
             await deleteAll()
         }
