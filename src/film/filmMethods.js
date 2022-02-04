@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const { argv } = require("yargs");
 const FilmModel = require("./filmModel");
 
@@ -7,7 +6,7 @@ exports.addMovie = async (newFilm) => {
     try {
         let movie = new FilmModel(newFilm)
         await movie.save()
-        console.log(`Movie added: "${argv.title}" with ${argv.actor}`)
+        console.log(`Movie added: "${argv.title}" (${argv.year})`)
     }
     catch (error) {
         console.log(error)
@@ -20,6 +19,12 @@ exports.listMovie = async () => {
         if (argv.title) {
             const listResult = await FilmModel.find(
                 { title: argv.title }
+            )
+            console.log(listResult)
+        }
+        else if (argv.year) {
+            const listResult = await FilmModel.find(
+                { year: argv.year }
             )
             console.log(listResult)
         }
@@ -56,31 +61,38 @@ exports.updateMovie = async () => {
     try {
         if (argv.newtitle) {
             await FilmModel.updateOne(
-                { title: argv.title },
+                { title: argv.title, year: argv.year },
                 { $set: { title: argv.newtitle } }
             )
-            console.log(`Movie title updated: from "${argv.title}" to "${argv.newtitle}"`)
+            console.log(`Movie title updated: "${argv.newtitle}" (${argv.year})`)
+        }
+        else if (argv.newyear) {
+            await FilmModel.updateOne(
+                { title: argv.title, year: argv.year },
+                { $set: { year: argv.newyear } }
+            )
+            console.log(`Movie year updated: "${argv.title}" (${argv.newyear})`)
         }
         else if (argv.newactor) {
             await FilmModel.updateOne(
-                { actor: argv.actor },
+                { title: argv.title, year: argv.year },
                 { $set: { actor: argv.newactor } }
             )
-            console.log(`Movie actor updated: from ${argv.actor} to ${argv.newactor}`)
+            console.log(`Movie actor updated: ${argv.newactor} - "${argv.title}" (${argv.year})`)
         }
         else if (argv.newgenre) {
             await FilmModel.updateOne(
-                { title: argv.title },
+                { title: argv.title, year: argv.year },
                 { $set: { genre: argv.newgenre } }
             )
-            console.log(`Movie "${argv.title}" genre updated: ${argv.newgenre}`)
+            console.log(`Movie genre updated: ${argv.newgenre} - "${argv.title}" (${argv.year})`)
         }
         else if (argv.newrating) {
             await FilmModel.updateOne(
-                { title: argv.title },
+                { title: argv.title, year: argv.year },
                 { $set: { rating: argv.newrating } }
             )
-            console.log(`Movie "${argv.title}" rating updated: ${argv.newrating}`)
+            console.log(`Movie rating updated: ${argv.newrating} - "${argv.title}" (${argv.year})`)
         }
     }
     catch (error) {
@@ -92,10 +104,9 @@ exports.updateMovie = async () => {
 exports.deleteMovie = async () => {
     try {
         await FilmModel.deleteOne(
-            { title: argv.title,
-            actor: argv.actor }
+            { title: argv.title, year: argv.year }
         )
-        console.log(`Movie deleted: "${argv.title}" with ${argv.actor}`) 
+        console.log(`Movie deleted: "${argv.title}" (${argv.year})`) 
     }
     catch (error) {
         console.log(error)

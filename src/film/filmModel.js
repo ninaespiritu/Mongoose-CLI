@@ -5,6 +5,10 @@ const filmSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    year: {
+        type: Number,
+        required: true,
+    },
     actor: {
         type: String,
         default: "Actor unknown",
@@ -14,7 +18,7 @@ const filmSchema = mongoose.Schema({
         default: "Genre unknown",
     },
     rating: {
-        type: Number,
+        type: String,
         default: "Rating unknown",
     }
 })
