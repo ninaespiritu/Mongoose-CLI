@@ -2,7 +2,7 @@ require("./db/connection");
 const mongoose = require("mongoose");
 const yargs = require("yargs");
 const { hideBin } = require("yargs/helpers");
-const { addMovie, listMovie, deleteMovie, updateMovie, deleteAll } = require("./film/filmMethods");
+const { addMovie, listMovie, listOne, deleteMovie, updateMovie, deleteAll } = require("./film/filmMethods");
 const argv = yargs(hideBin(process.argv)).argv;
 
 
@@ -20,7 +20,7 @@ const app = async () => {
         }
         // LIST MOVIE
         else if (argv.listOne) {
-            await listMovie()
+            await listOne()
         }
         // LIST ALL MOVIES 
         else if (argv.list) {
